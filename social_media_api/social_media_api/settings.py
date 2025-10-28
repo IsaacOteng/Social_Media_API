@@ -63,7 +63,7 @@ DEBUG = False
 if not DEBUG:  # Only apply in production
     SECURE_SSL_REDIRECT = True
 
-ALLOWED_HOSTS = ['spotifysocialapi.herokuapp.com', 'localhost', '127.0.0.1']
+ALLOWED_HOSTS = ['social-media-api-ep3g.onrender.com', 'localhost', '127.0.0.1']
 
 
 
