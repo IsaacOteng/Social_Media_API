@@ -9,31 +9,26 @@ https://docs.djangoproject.com/en/5.2/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.2/ref/settings/
 """
-from pathlib import Path
-import os
+
+
 import dj_database_url
+import os
+from pathlib import Path
 from dotenv import load_dotenv
-
-
-
-
-SECRET_KEY = os.getenv('DJANGO_SECRET_KEY', 'fallback-secret-key')
-
-# Security Settings
-SECURE_BROWSER_XSS_FILTER = True
-X_FRAME_OPTIONS = 'DENY'
-SECURE_CONTENT_TYPE_NOSNIFF = True
-SECURE_SSL_REDIRECT = True  # Redirect HTTP to HTTPS (Heroku, AWS, etc.)
-SESSION_COOKIE_SECURE = True
-CSRF_COOKIE_SECURE = True
-
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 load_dotenv(BASE_DIR / '.env')
 
+SECRET_KEY = os.getenv('DJANGO_SECRET_KEY', 'fallback-secret-key')
+DEBUG = os.getenv('DEBUG', 'False') == 'True'
 
-# Build paths inside the project like this: BASE_DIR / 'subdir'.
+ALLOWED_HOSTS = [
+    'social-media-api-ep3g.onrender.com',
+    'localhost',
+    '127.0.0.1'
+]
 
+# Database
 DATABASE_URL = os.getenv('DATABASE_URL')
 
 if DATABASE_URL:
@@ -52,6 +47,22 @@ else:
         }
     }
 
+
+# Security Settings
+SECURE_BROWSER_XSS_FILTER = True
+X_FRAME_OPTIONS = 'DENY'
+SECURE_CONTENT_TYPE_NOSNIFF = True
+SECURE_SSL_REDIRECT = True  # Redirect HTTP to HTTPS (Heroku, AWS, etc.)
+SESSION_COOKIE_SECURE = True
+CSRF_COOKIE_SECURE = True
+
+
+
+
+# Build paths inside the project like this: BASE_DIR / 'subdir'.
+
+
+
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
 
@@ -62,8 +73,6 @@ DEBUG = False
 
 if not DEBUG:  # Only apply in production
     SECURE_SSL_REDIRECT = True
-
-ALLOWED_HOSTS = ['social-media-api-ep3g.onrender.com', 'localhost', '127.0.0.1']
 
 
 
